@@ -1,16 +1,6 @@
 require '../src/terminal.rb'
 require '../src/function.rb'
-
-class Array
-  def random
-    self[rand(length)]
-  end
-  def average
-    self.inject {|sum,i|
-      sum + i
-    } / length
-  end
-end
+require '../src/customMethods.rb'
 
 class Program
   def self.generate(functions = Functions, terminals = Terminals, depth = nil)

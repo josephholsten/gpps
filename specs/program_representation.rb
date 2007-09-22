@@ -92,14 +92,12 @@ describe "Program representation" do
     program_fitnesses = []
     for i in 0..2000
       p = Program.generate(Functions, Terminals + Variables, 8)
-      f = Program.fitness(lambda {|params| params[0] ** 2 + 1}, p)
+      f = Program.fitness(lambda {|params| ((params[0] ** 2)/2) + 1}, p)
       program_fitnesses[i] = {:program => p,:fitness => f}
     end
-    program_fitnesses.sort {|x,y|
+    program_fitnesses.sort! {|x,y|
       x[:fitness] <=> y[:fitness]
     }
-    "#{program_fitnesses[0][:program].call([0])} better than #{program_fitnesses[19][:program].call([0])}".should == ""
     program_fitnesses[0][:fitness].should <= program_fitnesses[19][:fitness]
   end
-    
 end

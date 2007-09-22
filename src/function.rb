@@ -1,8 +1,4 @@
-class Array
-  def random
-    self[rand(length)]
-  end
-end
+require '../src/customMethods.rb'
 
 class Function
   def initialize(programs = [])
