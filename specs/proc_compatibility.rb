@@ -1,4 +1,4 @@
-require '../src/program.rb'
+require 'src/program'
 
 describe "Program proc interface" do
   it "should accept [] as call" do

@@ -1,15 +1,13 @@
-require '../src/terminal.rb'
-require '../src/function.rb'
-require '../src/customMethods.rb'
+require 'src/terminal'
+require 'src/function'
+require 'src/customMethods'
 
 class Program
   def self.generate(functions = Functions, terminals = Terminals, depth = nil)
-    if !depth
+    if !depth || depth > 1
       programs = functions + terminals
     elsif depth == 1
       programs = terminals
-    elsif depth > 1
-      programs = functions
     end
     program = programs.random.new
     program.populate_kids(functions, terminals, depth)

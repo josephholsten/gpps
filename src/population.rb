@@ -1,5 +1,5 @@
-require '../src/program.rb'
-require '../src/customMethods.rb'
+require 'src/program'
+require 'src/customMethods'
 
 class Population < Array
   def initialize(functions = Functions, terminals = Terminals+Variables, size = 30, maxdepth = 4)
@@ -29,8 +29,4 @@ if __FILE__ == $0
     print "Max Fitness(#{a.max})\n"
     print "Min Fitness(#{a.min})\n"
     print "Avg Fitness(#{a.average})\n\n"
-    
-    #print "RANDOM(#{p.randomPop[:fitness]})\n"
-    #print "RANDOM(#{p.randomPop[:fitness]})\n"
-    #p.fitnessArray().sort.each { |f| print "Fitness(#{f})\n" }
 end

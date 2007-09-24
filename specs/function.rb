@@ -1,4 +1,4 @@
-require '../src/program.rb'
+require 'src/program'
 
 describe "Function representations" do
   it "should add terminals" do

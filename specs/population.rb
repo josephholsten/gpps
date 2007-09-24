@@ -1,4 +1,4 @@
-require '../src/population.rb'
+require 'src/population'
 
 describe "Population representation" do
   it "should default to a population of 30" do

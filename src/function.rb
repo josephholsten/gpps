@@ -1,4 +1,4 @@
-require '../src/customMethods.rb'
+require 'src/customMethods'
 
 class Function
   def initialize(programs = [])
@@ -16,12 +16,10 @@ class Function
   end
 
   def populate_kids(functions, terminals, depth)
-    if !depth
+    if !depth || depth > 2
       programs = functions + terminals
     elsif depth == 2
       programs = terminals
-    elsif depth > 2
-      programs = functions
     end
 
     for i in 0..1

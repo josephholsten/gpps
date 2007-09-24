@@ -1,4 +1,4 @@
-require '../src/terminal.rb'
+require 'src/terminal'
 
 describe "Terminal representations" do
   it "should represent negative five" do

@@ -1,4 +1,4 @@
-require '../src/program.rb'
+require 'src/program'
 
 describe "Program representation" do
   it "should call recursively call programs" do
@@ -49,21 +49,21 @@ describe "Program representation" do
     program.size.should be_a_kind_of(Numeric)
   end
 
-  it "should generate a random program of depth 1" do
+  it "should generate a random program of depth <= 1" do
     for i in 0..100
-      Program.generate(Functions, Terminals, 1).depth.should == 1
+      Program.generate(Functions, Terminals, 1).depth.should <= 1
     end
   end
 
   it "should generate a random program of depth 2" do
     for i in 0..100
-      Program.generate(Functions, Terminals, 2).depth.should == 2
+      Program.generate(Functions, Terminals, 2).depth.should <= 2
     end
   end
 
   it "should generate a random program within small depth" do
     for i in 0..100
-      Program.generate(Functions, Terminals, 5).depth.should == 5
+      Program.generate(Functions, Terminals, 5).depth.should <= 5
     end
   end
   
