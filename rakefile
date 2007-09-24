@@ -6,4 +6,18 @@ Spec::Rake::SpecTask.new('examples') do |t|
   t.spec_files = FileList['specs/**/*.rb']
 end
 
+
+# Final portion for deliverable1
+task :deliverable_one do
+  require 'src/population'
+  p = Population.new()
+  p.fitnessAgainst(lambda {|params| ((params[0] ** 2)/2) + 1})
+  
+  a = p.fitnessArray().sort
+  a.each { |f| print "Fitness(#{f})\n" }
+  print "Max Fitness(#{a.max})\n"
+  print "Min Fitness(#{a.min})\n"
+  print "Avg Fitness(#{a.average})\n\n"
+end
+
 task :default => :examples

@@ -18,15 +18,3 @@ class Population < Array
     self.collect { |p| p[:fitness] }
   end
 end
-
-# Final portion for deliverable1
-if __FILE__ == $0
-    p = Population.new()
-    p.fitnessAgainst(lambda {|params| ((params[0] ** 2)/2) + 1})
-    
-    a = p.fitnessArray().sort
-    a.each { |f| print "Fitness(#{f})\n" }
-    print "Max Fitness(#{a.max})\n"
-    print "Min Fitness(#{a.min})\n"
-    print "Avg Fitness(#{a.average})\n\n"
-end
