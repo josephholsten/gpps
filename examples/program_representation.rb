@@ -80,24 +80,26 @@ describe "Program representation" do
       p.to_s.should be_a_kind_of(String)
     }
   end
+end
 
+describe "Fitness" do
   it "should compare fitness" do
     actual_program = Plus.new([Multiply.new([VariableZero.new, VariableZero.new]), PositiveOne.new])
-    expected_program = lambda {|params| params[0] ** 2 + 1}
-    test_data = (-10..10).collect{|i| [i]}
+    expected_program = lambda {|i| i ** 2 + 1}
+    test_data = (-10..10)
     Program.fitness(expected_program, actual_program, test_data).should == 0
   end
   
   it "should compare fitness of random program" do
     program_fitnesses = []
-    for i in 0..2000
+    (0..2000).each {
       p = Program.generate(Functions, Terminals + Variables, 8)
-      f = Program.fitness(lambda {|params| ((params[0] ** 2)/2) + 1}, p)
-      program_fitnesses[i] = {:program => p,:fitness => f}
-    end
+      f = Program.fitness(lambda {|j| ((j ** 2)/2) + 1}, p)
+      program_fitnesses.push :program => p,:fitness => f
+    }
     program_fitnesses.sort! {|x,y|
       x[:fitness] <=> y[:fitness]
     }
-    program_fitnesses[0][:fitness].should <= program_fitnesses[19][:fitness]
+    program_fitnesses[0][:fitness].should <= program_fitnesses[2000][:fitness]
   end
 end

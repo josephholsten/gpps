@@ -44,11 +44,7 @@ describe "Terminal representations" do
   it "should represent five" do
     PositiveFive.new.call.should == 5
   end
-  
-  it "should return variable" do
-    VariableZero.new.call([10]).should == 10
-  end
-  
+
   it "should have depth one" do
     Zero.new.depth.should == 1
   end
@@ -63,5 +59,26 @@ describe "Terminal representations" do
   
   it "should have a string representations for a variable" do
     VariableZero.new.to_s.should == "x"
+  end
+end
+
+describe "Constant" do
+  it "should not be effected by parameters" do
+    const = PositiveOne.new
+    const.call(1).should == 1
+    const.call(2).should == 1
+  end
+  
+  it "should have arty 0" do
+    const = PositiveOne.new
+    const.arity.should == 0
+  end
+    
+end
+
+describe "Variable" do
+  
+  it "should return variable on call" do
+    VariableZero.new.call(10, 20, 30).should == 10
   end
 end

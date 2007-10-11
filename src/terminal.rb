@@ -1,12 +1,20 @@
 class Terminal
+  attr_accessor :parent
+  
+  # defers to the subclass implementation of #call()
   def [](*params)
     call(*params)
   end
+  
+  # Always returns zero, as it should never depend on any variables
   def arity
     0
   end
+  
+  # Does nothing, as terminals have no kids
   def populate_kids(functions, terminals, depth)
   end
+  
   def depth
     1
   end
@@ -16,13 +24,33 @@ class Terminal
   def to_s
     call.to_s
   end
+  
+  # Having no kids, there should always be a valid nimber of kids.
+  def valid_kids?
+    true
+  end
+  
+  # Having no kids, there should never be too few kids.
+  def too_few_kids?
+    false
+  end
+  
+  # Having no kids, there should never be too many kids.
+  def too_many_kids?
+    false
+  end
+  
+  
+  def root?
+    @parent.nil?
+  end
 end
 
 def Number(n)
   eval <<-END
     Class.new(Terminal) do
-      def call(variables=nil)
-        #{n}
+      def call(*variables)
+        return #{n}
       end
     end
   END
@@ -62,12 +90,17 @@ class PositiveFive < Number 5
 end
 
 class VariableZero < Terminal
-  def call(variables = nil)
+  
+  # Returns the first parameter
+  def call(*variables)
     variables[0]
   end
+  
+  # Only operates on first parameter, any others are ignored
   def arity
     1
   end
+  
   def to_s
     "x"
   end

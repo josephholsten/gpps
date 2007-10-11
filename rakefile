@@ -1,14 +1,18 @@
 require 'rake'
 require 'spec/rake/spectask'
+require 'rake/rdoctask'
+
+task :default => [:examples, :rdoc]
+
+# Final portion for deliverable1
+task :deliverable_one => :knowledge_representation
 
 desc "Run all examples"
 Spec::Rake::SpecTask.new('examples') do |t|
   t.spec_files = FileList['examples/**/*.rb']
 end
 
-
-# Final portion for deliverable1
-task :deliverable_one do
+task :knowledge_representation do
   require 'src/population'
   p = Population.new()
   p.fitnessAgainst(lambda {|params| ((params[0] ** 2)/2) + 1})
@@ -20,4 +24,14 @@ task :deliverable_one do
   print "Avg Fitness(#{a.average})\n\n"
 end
 
-task :default => :examples
+desc 'Generate documentation'
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = "doc"
+  rdoc.rdoc_files.include('README', 'src/**/*.rb')
+  rdoc.options << "--quiet"
+end
+
+desc 'Remove all generated files'
+task :clean do
+  `rm -rf doc`
+end

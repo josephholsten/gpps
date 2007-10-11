@@ -1,6 +1,6 @@
 require 'src/population'
 
-describe "Population representation" do
+describe Population do
   it "should default to a population of 30" do
     Population.new.length.should == 30
   end
