@@ -3,6 +3,8 @@ require 'src/customMethods'
 
 class Population < Array
   def initialize(functions = Functions, terminals = Terminals+Variables, size = 30, maxdepth = 4)
+    return if functions.nil?
+    
     1.upto(size) { |i|
       self.push( { :program => Program.generate(functions, terminals, rand(maxdepth)+1) })
     }
