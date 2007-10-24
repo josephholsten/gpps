@@ -40,9 +40,12 @@ class Terminal
     false
   end
   
-  
   def root?
     @parent.nil?
+  end
+
+  def ==(obj)
+    self.to_s == obj.to_s
   end
 end
 

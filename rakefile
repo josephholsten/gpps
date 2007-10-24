@@ -4,12 +4,25 @@ require 'rake/rdoctask'
 
 task :default => [:examples, :rdoc]
 
-# Final portion for deliverable1
-task :deliverable_one => :knowledge_representation
+# Deliverables
+task :deliverable1 => :knowledge_representation
+task :deliverable2 => :search_operators
 
 desc "Run all examples"
 Spec::Rake::SpecTask.new('examples') do |t|
   t.spec_files = FileList['examples/**/*.rb']
+end
+
+desc 'Generate documentation'
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = "doc"
+  rdoc.rdoc_files.include('README', 'src/**/*.rb')
+  rdoc.options << "--quiet"
+end
+
+desc 'Remove all generated files'
+task :clean do
+  `rm -rf doc`
 end
 
 task :knowledge_representation do
@@ -24,14 +37,18 @@ task :knowledge_representation do
   print "Avg Fitness(#{a.average})\n\n"
 end
 
-desc 'Generate documentation'
-Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = "doc"
-  rdoc.rdoc_files.include('README', 'src/**/*.rb')
-  rdoc.options << "--quiet"
-end
 
-desc 'Remove all generated files'
-task :clean do
-  `rm -rf doc`
+task :search_operators do
+  require 'src/reproduction'
+  #Populate many trees
+  p=Population.new()
+  
+  #Pick a random tree
+  randomReproducedIndividual = RandomPick(p)
+  
+  #Store the string representation of that tree
+  printIndividual=randomReproducedIndividual.to_s
+  
+  #Print that string
+  print "The random individual is: (#{printIndividual})\n"
 end

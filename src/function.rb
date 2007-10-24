@@ -3,7 +3,7 @@ require 'src/customMethods'
 Infinity = 1.0/0
 
 class Function
-  attr_accessor :parent
+  attr_accessor :parent, :kids
   
   # Creates and executable function with an array of programs as
   # inputs. If there are not enough input programs provided at
@@ -79,6 +79,18 @@ class Function
   
   def root?
     @parent.nil?
+  end
+  
+  def ==(obj)
+    self.to_s == obj.to_s
+  end
+  
+  def clone
+    # ensure that the clone's children are different
+    cloned_kids = @kids.collect {|k|
+      k.clone
+    }
+    self.class.new(cloned_kids)
   end
 end
 
