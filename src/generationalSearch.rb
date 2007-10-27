@@ -5,16 +5,11 @@ class GenerationalSearch
   
   #NOTE: If a crossover operator is selected as the last operator in creating a new generation then the generation size could increase by one
   def search(population, fitnessAgainst, testData, generationNum)
-    # Evaluate the fitnesses and check for a perfect match
+    # If this is the last generation OR if a perfect match has been found then return the best match found
     population.fitnessAgainst(fitnessAgainst, testData)
     min = population.fitnessArray.min
-    if min== 0
-      population.each{ |indiv| return indiv[:program] if indiv[:fitness]==0 }
-    end
-    
-    # If this is the last generation then return the best match found
-    if generationNum == 0
-      population.each{ |indiv| return indiv[:program] if indiv[:fitness]==min } 
+    if min== 0 || generationNum == 0
+      population.each_index{ |x| return population[x] if population.fitnessArray[x]==min }
     end
     
     # Generate a new population
@@ -41,18 +36,18 @@ class GenerationalSearch
     
     return search(newpopulation, fitnessAgainst, testData, generationNum-1)
   end
-  
-  #random selection
-  #def getRandomIndividual(population)
-  #  return population.random
-  #end
-  
+
   #tournament selection
   def getRandomIndividual(population, tournament=3)
     indiv = []
-    (0..tournament).each { indiv.push(population.random) }
-    minFitness = indiv.collect{ |x| x[:fitness] }.min
-    indiv.each { |i| return i if i[:fitness] == minFitness }
+    fitness = []
+    (1..tournament).each { 
+      x = rand(population.length)
+      indiv.push(population[x]) 
+      fitness.push(population.fitnessArray[x])
+    }
+    minFitness = fitness.min
+    indiv.each_index { |x| return indiv[x] if fitness[x] == minFitness }
     
     return indiv.ramdom #should never get here
   end

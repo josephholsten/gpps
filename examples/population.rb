@@ -10,15 +10,17 @@ describe Population do
   end
 
   it "should default to a max depth of 4" do
-    Population.new(Functions, Terminals + Variables, 100).each { |x| x[:program].depth.should <= 4 }
+    Population.new(Functions, Terminals + Variables, 100).each { |x| x.depth.should <= 4 }
   end
     
   it "should create a population of max depth 8" do
-    Population.new(Functions, Terminals + Variables, 100, 8).each { |x| x[:program].depth.should <= 8 }
+    Population.new(Functions, Terminals + Variables, 100, 8).each { |x| x.depth.should <= 8 }
   end
   
   it "should run fitness tests against all members" do
-    Population.new.fitnessAgainst(PositiveOne.new).each { |x| x[:fitness].should be_a_kind_of(Numeric) }
+    p = Population.new
+    p.fitnessAgainst(PositiveOne.new)
+    p.each_index { |x| p.fitnessArray[x].should be_a_kind_of(Numeric) }
   end
 
   it "should get a min fitness of one" do
@@ -33,5 +35,5 @@ describe Population do
     i = Population.new([Plus], [PositiveOne],20, 2).fitnessAgainst(PositiveThree.new).fitnessArray.average
     i.should >= 1
     i.should <= 4
-  end    
+  end
 end

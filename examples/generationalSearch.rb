@@ -21,6 +21,6 @@ describe GenerationalSearch do
   it "should return a match of two from the tournament" do
     p = Population.new([Plus], [PositiveOne], 30, 2) #should be an array of ("1" or "1+1")
     p.fitnessAgainst(PositiveThree.new)
-    GenerationalSearch.new.getRandomIndividual(p, 50)[:program].call.should == 2
+    GenerationalSearch.new.getRandomIndividual(p, 50).call.should == 2
   end
 end
