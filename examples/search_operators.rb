@@ -1,6 +1,5 @@
 require 'src/function'
 require 'src/terminal'
-require 'src/reproduction'
 
 describe "Search Operations" do
   it "should implement crossover" do
