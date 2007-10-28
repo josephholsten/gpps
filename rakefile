@@ -1,29 +1,12 @@
+GPPS_ROOT = File.dirname(__FILE__)
 require 'rake'
-require 'spec/rake/spectask'
-require 'rake/rdoctask'
+require 'tasks/gpps'
 
-task :default => [:examples, :rdoc]
+task :default => [:examples, :rdoc, :stats]
 
 # Deliverables
 task :deliverable1 => :knowledge_representation
 task :deliverable2 => :search_operators
-
-desc "Run all examples"
-Spec::Rake::SpecTask.new('examples') do |t|
-  t.spec_files = FileList['examples/**/*.rb']
-end
-
-desc 'Generate documentation'
-Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = "doc"
-  rdoc.rdoc_files.include('README', 'src/**/*.rb')
-  rdoc.options << "--quiet"
-end
-
-desc 'Remove all generated files'
-task :clean do
-  `rm -rf doc`
-end
 
 task :knowledge_representation do
   require 'src/population'
@@ -36,7 +19,6 @@ task :knowledge_representation do
   print "Min Fitness(#{a.min})\n"
   print "Avg Fitness(#{a.average})\n\n"
 end
-
 
 task :search_operators do
   require 'src/reproduction'
@@ -51,4 +33,9 @@ task :search_operators do
   
   #Print that string
   print "The random individual is: (#{printIndividual})\n"
+end
+
+desc 'Remove all generated files'
+task :clean do
+  `rm -rf doc`
 end

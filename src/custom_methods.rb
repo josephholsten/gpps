@@ -7,18 +7,10 @@ class Array
       sum + i
     } / length
   end
-  def max
-    m = nil
-    self.each { |x| m = x if m.nil? || x > m }
-    m
-  end
-  def min
-    m = nil
-    self.each { |x| m = x if m.nil? || x < m }
-    m
-  end
   def randomPop()
     r = self.random()
+    # isn't this the same?
+    # self.delete(r)
     self.delete(r) { nil }
   end
 end

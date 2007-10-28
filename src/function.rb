@@ -1,64 +1,25 @@
-require 'src/custom_methods'
-require 'src/program'
+require 'src/tree_program'
 
-Infinity = 1.0/0
-
-class Function # < Program
-  include Mutable
+module Function
   attr_accessor :parent, :kids
-  
-  # Creates an executable function with an array of programs as
-  # inputs. If there are not enough input programs provided at
-  # initialization, more can be generated with
-  # Fuction#populate_children.
-  def initialize(programs = [])
-    @kids = programs
-    @kids.each {|kid|
-      kid.parent = self
-    }
-  end
-  
-  def [](*params)
-    call(*params)
-  end
   
   # The number of used parameters depends on which variables are
   # actually used in the program. This searches for any terminals
   # which are variables and returns the greatest arity it finds.
   def arity
-    @kids.collect {|k|
-      k.arity
-    }.max
-  end
-
-  def populate_kids(functions, terminals, depth_limit = nil)
-    if !depth_limit || depth_limit > 2
-      programs = functions + terminals
-    elsif depth_limit == 2
-      programs = terminals
-    end
-
-    for i in 0..2      
-    # for i in 0..(self.valid_kids_range.first)
-      @kids[i] = programs.random.new unless @kids[i]
-    end
-    
-    @kids.each{|kid|
-      kid.parent = self
-      kid.populate_kids(functions, terminals, depth_limit ? depth_limit - 1 : nil)
-    }
+    node = @kids.max {|n,m| n.arity <=> m.arity }
+    node.arity
   end
   
+  # Return the number of nodes between the current node and the farthest
+  # node beneath it on the tree, inclusive. This is also known as the depth
+  # of this node's branch.
+  # This does returns neither the depth from the tree's true root to this
+  # current node, nor from the root to the farthest node. This is available
+  # via <code>TreeProgram#root.depth</code>.
   def depth
-    @kids.collect {|k|
-      k.depth
-    }.max + 1
-  end
-  
-  def size
-    @kids.inject(1) {|sum,k|
-      k.size + sum
-    }
+    node = @kids.max {|k, j| k.depth <=> j.depth }
+    node.depth + 1
   end
   
   def to_s
@@ -66,59 +27,29 @@ class Function # < Program
       str + " #{k}"
     } + ")"
   end
-
-  def valid_kids?
-    valid_kid_range === @kids.length
-  end
-  
-  def too_few_kids?
-    valid_kid_range.first > @kids.length
-  end
-  
-  def too_many_kids?
-    valid_kid_range.last < @kids.length
-  end
-  
-  def root?
-    @parent.nil?
-  end
-  
-  def ==(obj)
-    self.to_s == obj.to_s
-  end
   
   def clone
-    # ensure that the clone's children are different
-    cloned_kids = @kids.collect {|k|
-      k.clone
-    }
+    # ensure that the clone's children are not originals, but clones
+    cloned_kids = @kids.collect {|k| k.clone }
     self.class.new(cloned_kids)
-  end
-  
-  def to_a
-    ret = [self]
-    @kids.each do |kid|
-      kid.to_a.each {|node|
-        ret.push node
-      }
-    end
-    ret
   end
 end
 
-class Plus < Function
+class Plus < TreeProgram
+  include Function
+  
   def call(*variables)
     @kids[0].call(*variables) + @kids[1].call(*variables)
   end
-  def min_kids
-    2
-  end
-  def max_kids
-    2
+
+  def valid_kid_range
+    (2..2)
   end
 end
 
-class Subtract < Function   
+class Subtract < TreeProgram
+  include Function
+  
   def call(*variables)
     @kids[0].call(*variables) - @kids[1].call(*variables)
   end
@@ -128,7 +59,9 @@ class Subtract < Function
   end
 end
 
-class Multiply < Function
+class Multiply < TreeProgram
+  include Function
+  
   def call(*variables)
     @kids[0].call(*variables) * @kids[1].call(*variables)
   end
@@ -138,7 +71,9 @@ class Multiply < Function
   end
 end
 
-class Modulus < Function
+class Modulus < TreeProgram
+  include Function
+  
   def call(*variables)
     second_value = @kids[1].call(*variables)
     if second_value != 0
@@ -153,7 +88,8 @@ class Modulus < Function
   end
 end
 
-class Divide < Function
+class Divide < TreeProgram
+  include Function
   def call(*variables)
     second_value = @kids[1].call(*variables)
     if second_value != 0

@@ -1,4 +1,4 @@
-require 'src/generationalSearch'
+require 'src/generational_search'
 
 describe GenerationalSearch do
   it "should return a perfect match" do

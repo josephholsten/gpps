@@ -62,7 +62,8 @@ describe "children management" do
   end
 
   it "should know when it has too many kids" do
-    program = Divide.new([Zero.new, Zero.new, Zero.new])
+    program = Divide.new
+    program.kids = [Zero.new, Zero.new, Zero.new]
     program.too_many_kids?.should == true
     program.valid_kids?.should == false
     program.too_few_kids?.should == false

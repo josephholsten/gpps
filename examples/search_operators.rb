@@ -3,8 +3,44 @@ require 'src/terminal'
 require 'src/program'
 
 describe "Search Operations" do
-  it "should implement crossover" do
-    pending("reproduction")
+  it "should implement crossover with no terminals" do
+    first = Plus.new [Zero.new, Zero.new]
+    second = Modulus.new [PositiveOne.new, NegativeOne.new]
+    
+    first_child, second_child = first.crossover(second)
+    
+    first_child.should_not == first
+    second_child.should_not == second
+  end
+
+  it "should implement crossover with second terminal" do
+    first = Plus.new [Zero.new, Zero.new]
+    second = PositiveOne.new
+    
+    first_child, second_child = first.crossover(second)
+    
+    first_child.should_not == first
+    second_child.should_not == second
+  end
+
+  it "should implement crossover with first terminal" do
+    first = Zero.new
+    second = Modulus.new [PositiveOne.new, NegativeOne.new]
+    first_child, second_child = first.crossover(second)
+
+    first_child.should_not == first
+    second_child.should_not == second
+  end
+  
+  it "should implement crossover with both terminals" do
+    first = Zero.new
+    second = PositiveOne.new
+    first_child, second_child = first.crossover(second)
+    
+    first_child.should_not == first
+    first_child.should == second
+    second_child.should_not == second
+    second_child.should == first
   end
 
   it "should implement mutation" do
@@ -22,7 +58,6 @@ describe "Search Operations" do
     child = program.mutate(Functions, non_zero_terminals, nil)
     child.should_not == program
   end
-  
 
   it "should implement terminal mutation" do
     non_zero_terminals = [NegativeFive,
