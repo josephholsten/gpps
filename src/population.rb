@@ -1,5 +1,5 @@
 require 'src/program'
-require 'src/customMethods'
+require 'src/custom_methods'
 
 class Population < Array
   attr_reader :fitnessArray

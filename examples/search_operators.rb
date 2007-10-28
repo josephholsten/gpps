@@ -1,5 +1,6 @@
 require 'src/function'
 require 'src/terminal'
+require 'src/program'
 
 describe "Search Operations" do
   it "should implement crossover" do
@@ -7,9 +8,37 @@ describe "Search Operations" do
   end
 
   it "should implement mutation" do
-    pending("reproduction")
+    non_zero_terminals = [NegativeFive,
+                          NegativeFour,
+                          NegativeThree,
+                          NegativeTwo,
+                          NegativeOne,
+                          PositiveOne,
+                          PositiveTwo,
+                          PositiveThree,
+                          PositiveFour,
+                          PositiveFive]
+    program = Plus.new [Zero.new, Zero.new]
+    child = program.mutate(Functions, non_zero_terminals, nil)
+    child.should_not == program
   end
   
+
+  it "should implement terminal mutation" do
+    non_zero_terminals = [NegativeFive,
+                          NegativeFour,
+                          NegativeThree,
+                          NegativeTwo,
+                          NegativeOne,
+                          PositiveOne,
+                          PositiveTwo,
+                          PositiveThree,
+                          PositiveFour,
+                          PositiveFive]
+    program = Zero.new
+    child = program.mutate(Functions, non_zero_terminals, nil)
+    child.should_not == program
+  end
 end
 
 describe "Reproduction Operation" do
@@ -53,22 +82,4 @@ describe "Reproduction Operation" do
     term2 = Zero.new
     term1.should == term2
   end
-  
-  it "should randomly pick a program" do
-    pending "reproduction"
-    #As a test, generate a population
-    population = Populate.new()
-    #Randomly pick an element in the array, and store it in a temporary variable
-    tempProgram = RandomPick(population)
-    #tempProgram.should == 
-    ########    Joe, maybe you can help me out right here.  I'm not sure exactly how to tell it it 'should' be
-    ########    random.  I also am not sure of the difference between this:  return a random program and return
-    ########    a random program.  Both should be the same thing, right?  I may be getting caught up in how simple
-    ########    the reproduce operator will be.  I find it difficult to think of things it should be doing other 
-    ########    than the obvious.  Also, I imagine that a population consists of an array of programs, which are
-    ########    arrays of functions and terminals (which themselves are elements of arrays Functions, Terminsals).
-    ########    Am I right about this?
-    
-  end
-  
 end

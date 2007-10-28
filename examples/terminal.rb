@@ -1,6 +1,6 @@
 require 'src/terminal'
 
-describe "Terminal representations" do
+describe "Constant representations" do
   it "should represent negative five" do
     NegativeFive.new.call.should == -5
   end
@@ -44,41 +44,55 @@ describe "Terminal representations" do
   it "should represent five" do
     PositiveFive.new.call.should == 5
   end
-
-  it "should have depth one" do
-    Zero.new.depth.should == 1
-  end
-  
-  it "should have a size one" do
-    Zero.new.size.should == 1
-  end
-  
-  it "should have string representation" do
-    NegativeFive.new.to_s.should == "-5"
-  end
-  
-  it "should have a string representations for a variable" do
-    VariableZero.new.to_s.should == "x"
-  end
 end
 
 describe "Constant" do
-  it "should not be effected by parameters" do
-    const = PositiveOne.new
-    const.call(1).should == 1
-    const.call(2).should == 1
+  before :each do
+    @const = PositiveOne.new
   end
   
-  it "should have arty 0" do
-    const = PositiveOne.new
-    const.arity.should == 0
+  it "should not be effected by parameters on call" do
+    @const.call(1).should == @const.call(2)
   end
-    
+  
+  it "should have arity 0" do
+    @const.arity.should == 0
+  end
 end
 
 describe "Variable" do
+  before :each do
+    @var = VariableZero.new
+  end
   
   it "should return variable on call" do
-    VariableZero.new.call(10, 20, 30).should == 10
+    @var.call(10, 20, 30).should == 10
+  end
+
+  it "should have a string representations for a variable" do
+    @var.to_s.should == "x"
+  end
+end
+
+describe Terminal do
+  before :each do
+    @term = NegativeFive.new
+  end
+  
+  it "should have an array representation" do
+    @term.to_a.length.should == 1
+    @term.to_a.first.should == @term
+  end
+
+  it "should have string representation" do
+    @term.to_s.should == "-5"
+  end
+
+  it "should have depth one" do
+    @term.depth.should == 1
+  end
+
+  it "should have a size one" do
+    @term.size.should == 1
   end
 end

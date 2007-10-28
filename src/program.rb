@@ -1,6 +1,6 @@
 require 'src/terminal'
 require 'src/function'
-require 'src/customMethods'
+require 'src/custom_methods'
 
 class Program
   def self.generate(functions = Functions, terminals = Terminals, depth = nil)

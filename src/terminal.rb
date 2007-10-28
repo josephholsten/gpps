@@ -1,4 +1,8 @@
+require 'src/program'
+require 'src/mutable'
+
 class Terminal
+  include Mutable
   attr_accessor :parent
   
   # defers to the subclass implementation of #call()
@@ -46,6 +50,10 @@ class Terminal
 
   def ==(obj)
     self.to_s == obj.to_s
+  end
+  
+  def to_a
+    [self]
   end
 end
 

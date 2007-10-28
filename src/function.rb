@@ -1,11 +1,13 @@
-require 'src/customMethods'
+require 'src/custom_methods'
+require 'src/program'
 
 Infinity = 1.0/0
 
-class Function
+class Function # < Program
+  include Mutable
   attr_accessor :parent, :kids
   
-  # Creates and executable function with an array of programs as
+  # Creates an executable function with an array of programs as
   # inputs. If there are not enough input programs provided at
   # initialization, more can be generated with
   # Fuction#populate_children.
@@ -91,6 +93,16 @@ class Function
       k.clone
     }
     self.class.new(cloned_kids)
+  end
+  
+  def to_a
+    ret = [self]
+    @kids.each do |kid|
+      kid.to_a.each {|node|
+        ret.push node
+      }
+    end
+    ret
   end
 end
 

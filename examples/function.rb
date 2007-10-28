@@ -1,4 +1,5 @@
-require 'src/program'
+require 'src/function'
+require 'src/terminal'
 
 describe "Function representations" do
   it "should add terminals" do
@@ -34,6 +35,14 @@ describe "Function representations" do
   it "should return zero when dividing by zero" do
     program = Divide.new([PositiveFour.new, Zero.new])
     program.call.should == 0
+  end
+
+  it "should have an recursive array representation" do
+    program = Plus.new [Zero.new, Zero.new]
+    arr = program.to_a
+    arr.length.should == 3
+    arr[0].should == program
+    arr[1].should == Zero.new
   end
 end
 
