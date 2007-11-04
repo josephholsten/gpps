@@ -44,6 +44,15 @@ describe "Function representations" do
     arr[0].should == program
     arr[1].should == Zero.new
   end
+  
+  it "should not round when dividing" do
+    Divide.new([PositiveThree.new, PositiveTwo.new]).call.should == 1.5
+  end
+
+  it "should not round when multiplying" do
+    Multiply.new([Divide.new([PositiveOne.new, PositiveTwo.new]), PositiveFive.new]).call.should == 2.5
+  end
+
 end
 
 describe "children management" do

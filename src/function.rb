@@ -23,9 +23,16 @@ module Function
   end
   
   def to_s
-    kids_string = @kids.inject("(#{self.class}") {|str,k|
-      str + " #{k}"
-    } + ")"
+    #kids_string = @kids.inject("(#{self.class}") {|str,k|
+    #  str + " #{k}"
+    #} + ")"
+    f = self.class
+    f = "+" if self.is_a?(Plus)
+    f = "-" if self.is_a?(Subtract)
+    f = "*" if self.is_a?(Multiply)
+    f = "/" if self.is_a?(Divide)
+    f = "%" if self.is_a?(Modulus)
+    "(#{@kids[0]} #{f} #{@kids[1]})"
   end
   
   def clone
@@ -93,7 +100,7 @@ class Divide < TreeProgram
   def call(*variables)
     second_value = @kids[1].call(*variables)
     if second_value != 0
-      @kids[0].call(*variables) / second_value
+      (@kids[0].call(*variables) * 1.0) / (second_value * 1.0)
     else
       0
     end

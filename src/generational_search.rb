@@ -2,61 +2,40 @@ require 'src/population'
 
 class GenerationalSearch
   # perhaps instead:
-  # Probabilities = {:mutation => 0.3, :reproduction => 0.3, :crossover => 0.4}
-  Probibilities = [ 0.3,  0.3, 0.4 ] #Mutate/Reproduce/Crossover
+  Probibilities = { :mutation => 0.4, :reproduction =>  0.2, :crossover => 0.4 }
   
   #NOTE: If a crossover operator is selected as the last operator in
   # creating a new generation then the generation size could increase by one
-  def search(population, fitnessAgainst, testData, generationNum)
+  def search(population, fitness_against, test_data, generation_num)
     # If this is the last generation OR if a perfect match has been found then return the best match found
-    population.fitnessAgainst(fitnessAgainst, testData)
+    population.fitnessAgainst(fitness_against, test_data)
     min = population.fitnessArray.min
-    if min== 0 || generationNum == 0
+    if min== 0 || generation_num == 0
       population.each_index{ |x| return population[x] if population.fitnessArray[x]==min }
     end
     
-    # Generate a new population
-    newpopulation = Population.new(nil)
+    # Create a new (empty) population array
+    newpopulation = Population.new(population)
     
     # Populate the new population using mutations on selected individuals
-    while newpopulation.length < population.length
+    while newpopulation.length < newpopulation.size
       p = rand
       # so you could do this as Probabilities[:mutation], etc
-      if p < Probibilities[0] #Mutate
-        # since mutate will clone for you, perhaps:
-        #   new_population.push population.random.mutate
-        newIndiv = getRandomIndividual(population).clone
-        individualMutate!(newIndiv)
-        newpopulation.push(newIndiv)
-      elsif p < Probibilities[0]+Probibilities[1] #Reproduce
-        # could this just be
-        #   new_population.push population.random.clone
-        newIndiv = getRandomIndividual(population).clone
-        individualReproduce!(newIndiv)
-        newpopulation.push(newIndiv)
+      if p < Probibilities[:mutation] #Mutate
+        newpopulation.push(get_random_individual(population).mutate(newpopulation.functions, newpopulation.terminals, newpopulation.maxdepth) )
+      elsif p < Probibilities[:mutation]+Probibilities[:reproduction]
+        newpopulation.push(get_random_individual(population).clone)
       else #Crossover
-        # this might merit a helper method for context
-        #  def get_new_crossover_individuals(population)
-        #    first_individual = population.random
-        #    second_individual = population.random
-        #    first_individual.crossover second_individual
-        #  end
-        #
-        # which would enable a simple
-        #
-        #  new_population.push get_new_crossover_individuals(population)
-        newIndiv1 = getRandomIndividual(population).clone
-        newIndiv2 = getRandomIndividual(population).clone
-        individualCrossover!(newIndiv1, newIndiv2)
-        newpopulation.push(newIndiv1, newIndiv2)
+        (new1, new2) = get_random_crossover(population)
+        newpopulation.push(new1, new2)
       end
     end
     
-    return search(newpopulation, fitnessAgainst, testData, generationNum-1)
+    return search(newpopulation, fitness_against, test_data, generation_num-1)
   end
 
   #tournament selection
-  def getRandomIndividual(population, tournament=3)
+  def get_random_individual(population, tournament=3)
     indiv = []
     fitness = []
     (1..tournament).each { 
@@ -64,9 +43,22 @@ class GenerationalSearch
       indiv.push(population[x]) 
       fitness.push(population.fitnessArray[x])
     }
-    minFitness = fitness.min
-    indiv.each_index { |x| return indiv[x] if fitness[x] == minFitness }
+    min_fitness = fitness.min
+    indiv.each_index { |x| return indiv[x] if fitness[x] == min_fitness }
     
-    return indiv.ramdom #should never get here
+    return indiv.random #should never get here
+  end
+  
+  def get_random_crossover(population)
+    first_individual = population.random
+    second_individual = population.random
+    
+    (newone, newtwo) = first_individual.crossover(second_individual)
+    
+    if newone.depth > population.maxdepth || newtwo.depth > population.maxdepth
+      return get_random_crossover(population) #try again
+    else
+      return [newone, newtwo]
+    end
   end
 end
