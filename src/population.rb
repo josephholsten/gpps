@@ -34,4 +34,9 @@ class Population < Array
       @fitnessArray[x] = Program.fitness(expected_program, self[x], test_data)
     }
   end
+  
+  def erase()
+    self.clear
+    @fitnessArray = []
+  end
 end
