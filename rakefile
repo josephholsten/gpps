@@ -1,41 +1,13 @@
 GPPS_ROOT = File.dirname(__FILE__)
 require 'rake'
 require 'tasks/gpps'
+require 'src/custom_methods'
 
-task :default => [:examples, :rdoc, :stats]
+task :default => [:rdoc, :examples, :stats]
 
 # Deliverables
 task :deliverable1 => :knowledge_representation
 task :deliverable2 => :search_operators
+task :deliverable3 => :generational_search
 
-task :knowledge_representation do
-  require 'src/population'
-  p = Population.new()
-  p.fitnessAgainst(lambda {|params| ((params[0] ** 2)/2) + 1})
-  
-  a = p.fitnessArray().sort
-  a.each { |f| print "Fitness(#{f})\n" }
-  print "Max Fitness(#{a.max})\n"
-  print "Min Fitness(#{a.min})\n"
-  print "Avg Fitness(#{a.average})\n\n"
-end
-
-task :search_operators do
-  require 'src/reproduction'
-  #Populate many trees
-  p=Population.new()
-  
-  #Pick a random tree
-  randomReproducedIndividual = RandomPick(p)
-  
-  #Store the string representation of that tree
-  printIndividual=randomReproducedIndividual.to_s
-  
-  #Print that string
-  print "The random individual is: (#{printIndividual})\n"
-end
-
-desc 'Remove all generated files'
-task :clean do
-  `rm -rf doc`
-end
+task :deliverables => [:knowledge_representation, :search_operators, :generational_search]

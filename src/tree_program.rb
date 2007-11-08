@@ -135,6 +135,15 @@ class TreeProgram
     return [second_node.root, first_node.root]
   end
   
+  
+  
+  def fitness(expected_program, test_data = nil)
+    data = test_data || (0..5)
+    data.collect {|datum|
+      (expected_program.call(datum) - self.call(datum)) ** 2
+    }.average
+  end
+  
   private
   
   # Taking two nodes, swap each's parent's reference to it with the other

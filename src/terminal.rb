@@ -104,4 +104,3 @@ Terminals = [NegativeFive,
              PositiveFour,
              PositiveFive]
 Variables = [VariableZero]
-             

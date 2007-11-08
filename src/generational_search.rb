@@ -1,19 +1,16 @@
 require 'src/population'
 
 class GenerationalSearch
-  def initialize(num_generations=nil, tournament_size=nil, mutation_prob=nil, reproduction_prob=nil, crossover_prob=nil)
-    #defaults
-    @probibilities = { :mutation => 0.4, :reproduction =>  0.2, :crossover => 0.4 }
-    @num_generations = 50
-    @tournament_size = 3
+  def initialize(params = {})
+    @probabilities = {}
     
-    #overrides
-    @num_generations = num_generations if !num_generations.nil?
-    @tournament_size = tournament_size if !tournament_size.nil?
-    if !mutation_prob.nil? && !reproduction_prob.nil? && !crossover_prob.nil?
-      t = mutation_prob + reproduction_prob + crossover_prob
-      @probibilities = { :mutation => (mutation_prob/t), :reproduction => (reproduction_prob/t), :crossover => (crossover_prob/t) }
-    end
+    @num_generations = params[:generations]     || 50
+    @tournament_size = params[:tournament_size] || 3
+    
+    @probabilities[:mutation]     = params[:mutation]     || 0.4
+    @probabilities[:reproduction] = params[:reproduction] || 0.2
+    @probabilities[:crossover]    = params[:crossover]    || 0.4
+    normalize_probabilities
   end
   
   #NOTE: If a crossover operator is selected as the last operator in
@@ -21,11 +18,13 @@ class GenerationalSearch
   def search(population, fitness_against, test_data, generation_num=nil)
     generation_num = @num_generations if generation_num.nil?
 
-    # If this is the last generation OR if a perfect match has been found then return the best match found
-    population.fitnessAgainst(fitness_against, test_data)
-    min = population.fitnessArray.min
-    if min== 0 || generation_num == 0
-      population.each_index{ |x| return population[x] if population.fitnessArray[x]==min }
+    # If this is the last generation OR if a perfect match has been found then return the best match foundsrc="/images/about_files
+    population.fitness_function = fitness_against
+    population.test_data = test_data
+    min = population.fitness_array.min
+    
+    if min == 0 || generation_num == 0
+      population.each_index{ |x| return population[x] if population.fitness_array[x]==min }
     end
     
     # Create a new array
@@ -35,9 +34,9 @@ class GenerationalSearch
     while newpopulation.length < population.size
       p = rand
       # so you could do this as Probabilities[:mutation], etc
-      if p < @probibilities[:mutation] #Mutate
+      if p < @probabilities[:mutation] #Mutate
         newpopulation.push(get_random_individual(population).mutate(population.functions, population.terminals, population.maxdepth) )
-      elsif p < @probibilities[:mutation]+@probibilities[:reproduction]
+      elsif p < @probabilities[:mutation]+@probabilities[:reproduction]
         newpopulation.push(get_random_individual(population).clone)
       else #Crossover
         (new1, new2) = get_random_crossover(population)
@@ -55,17 +54,12 @@ class GenerationalSearch
 
   #tournament selection
   def get_random_individual(population, tournament=3)
-    indiv = []
-    fitness = []
-    (1..tournament).each { 
-      x = rand(population.length)
-      indiv.push(population[x]) 
-      fitness.push(population.fitnessArray[x])
+    individuals = []
+    tournament.times {
+      individuals.push population.random
     }
-    min_fitness = fitness.min
-    indiv.each_index { |x| return indiv[x] if fitness[x] == min_fitness }
     
-    return indiv.random #should never get here
+    individuals.min {|i,j| i.fitness(population.fitness_function) <=> j.fitness(population.fitness_function)}
   end
   
   def get_random_crossover(population)
@@ -75,9 +69,19 @@ class GenerationalSearch
     (newone, newtwo) = first_individual.crossover(second_individual)
     
     if newone.depth > population.maxdepth || newtwo.depth > population.maxdepth
-      return get_random_crossover(population) #try again
+      # new individuals have too large of a depth
+      # we should try again
+      return get_random_crossover(population) 
     else
       return [newone, newtwo]
     end
+  end
+  
+  private
+  def normalize_probabilities
+    t = @probabilities[:mutation] +  @probabilities[:reproduction] + @probabilities[:crossover]
+    @probabilities = { :mutation => (@probabilities[:mutation]/t),
+                       :reproduction => ( @probabilities[:reproduction]/t),
+                       :crossover => (@probabilities[:crossover]/t) }
   end
 end

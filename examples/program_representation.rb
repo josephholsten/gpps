@@ -87,14 +87,14 @@ describe "Fitness" do
     actual_program = Plus.new([Multiply.new([VariableZero.new, VariableZero.new]), PositiveOne.new])
     expected_program = lambda {|i| i ** 2 + 1}
     test_data = (-10..10)
-    Program.fitness(expected_program, actual_program, test_data).should == 0
+    actual_program.fitness(expected_program, test_data).should == 0
   end
   
   it "should compare fitness of random program" do
     program_fitnesses = []
     (0..2000).each {
       p = Program.generate(Functions, Terminals + Variables, 8)
-      f = Program.fitness(lambda {|j| ((j ** 2)/2) + 1}, p)
+      f = p.fitness(lambda {|j| ((j ** 2)/2) + 1})
       program_fitnesses.push :program => p,:fitness => f
     }
     program_fitnesses.sort! {|x,y|
