@@ -1,6 +1,9 @@
 require 'src/population'
 
 class GenerationalSearch
+  def debug(s)
+  end
+  
   def initialize(params = {})
     @probabilities = {}
     
@@ -21,6 +24,7 @@ class GenerationalSearch
     # If this is the last generation OR if a perfect match has been found then return the best match foundsrc="/images/about_files
     population.fitness_function = fitness_against
     population.test_data = test_data
+    debug("MIN(#{population.fitness_array.min}) AVG(#{population.fitness_array.average}) MAX(#{population.fitness_array.max})\n")
     min = population.fitness_array.min
     
     if min == 0 || generation_num == 0
