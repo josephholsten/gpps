@@ -37,6 +37,7 @@ class Population < Array
   
   def erase()
     self.clear
+    @fitness_rendered_flag = false
     @fitnessArray = []
   end
   

@@ -24,17 +24,33 @@ def runTest(input = {})
   #perfect = lambda {|j| (((1.0*j) ** 2) * 0.5) + 1}
   perfect = lambda {|j| ((1.0*j) ** 6) -(2.0*((1.0*j)**4)) + ((1.0*j)**2) }  # (x**6 - 2x**4 + x**2)
 
-  #p = Population.new :functions => Functions, :terminals => Terminals+[VariableZero], :size => population_size, :maxdepth => max_tree_depth
+  p = Population.new :functions => Functions, :terminals => Terminals+[VariableZero], :size => population_size, :maxdepth => max_tree_depth
   # I know we shouldn't need to but it helps quiet a bit if we trim down the number of terminals
-  p = Population.new :functions => [Multiply, Plus], :terminals => [PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, VariableZero], :size => population_size, :maxdepth => max_tree_depth
+  #p = Population.new :functions => [Multiply, Plus], :terminals => [PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, VariableZero], :size => population_size, :maxdepth => max_tree_depth
 
   g = GenerationalSearch.new :generations => num_generations, :tournament_size => tournament_size, :mutation => mutation_prob, :reproduction => reproduction_prob, :crossover => crossover_prob
   #(num_generations, tournament_size,  mutation_prob, reproduction_prob, crossover_prob)
 
   best = g.search(p, perfect, test_data)
+  
+  setup = ""
+  setup += "A" if population_size == 30
+  setup += "B" if population_size == 100
+  setup += "C" if population_size == 1000
+  setup += "A" if tournament_size == 1
+  setup += "B" if tournament_size == 3
+  setup += "C" if tournament_size == 7
+  setup += "A" if crossover_prob == 0.9
+  setup += "B" if crossover_prob == 0.4
+  setup += "C" if crossover_prob == 0.0
+  setup += "A" if num_generations == 10
+  setup += "B" if num_generations == 50
+  setup += "C" if num_generations == 250
+  setup += "A" if max_tree_depth == 3
+  setup += "B" if max_tree_depth == 4
+  setup += "C" if max_tree_depth == 6
 
-  print "SETUP: (#{input})\n"
-  print "FITNESS: #{myFitness(perfect, best, test_data)}\n"
+  print "SETUP[#{setup}]: (#{input})\n"
   print "BEST: #{best}\n\n"
   return [myFitness(perfect, best, test_data) , best]
 end
@@ -69,4 +85,3 @@ tests.each { |t|
   runTest(t[:params])
 }
 
-print "NumTests(#{tests.length})\n"
