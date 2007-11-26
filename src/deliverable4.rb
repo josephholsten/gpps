@@ -1,12 +1,5 @@
 require 'src/generational_search'
 
-def myFitness(expected_program, test , test_data = nil)
-  data = test_data || (0..5)
-  data.collect {|datum|
-    (expected_program.call(datum) - test.call(datum)) ** 2
-  }.average
-end
-
 def runTest(input = {})
   num_generations = input[:num_generations]
   max_tree_depth = input[:max_tree_depth]
@@ -52,11 +45,7 @@ def runTest(input = {})
 
   print "SETUP[#{setup}]: (#{input})\n"
   print "BEST: #{best}\n\n"
-  return [myFitness(perfect, best, test_data) , best]
-end
-
-def GetAverageTest(test)
-  
+  return [best.fitness(perfect, test_data), best]
 end
 
 tests = []

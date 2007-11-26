@@ -111,4 +111,44 @@ class Divide < TreeProgram
   end
 end
 
+class Logarithm < TreeProgram
+  include Function
+  def call(*variables)
+    maxValue = 5000000
+    first_value = @kids[0].call(*variables)
+    first_value = maxValue if first_value > maxValue
+    return 0 if first_value <= 0.001
+    Math.log(first_value)
+  end
+  
+  def valid_kid_range
+    (1..1)
+  end  
+end
+
+class Squared < TreeProgram
+  include Function
+  def call(*variables)
+    first_value = @kids[0].call(*variables)
+    first_value ** 2.0
+  end
+  
+  def valid_kid_range
+    (1..1)
+  end
+end
+
+class Cubed < TreeProgram
+  include Function
+  def call(*variables)
+    first_value = @kids[0].call(*variables)
+    first_value ** 3.0
+  end
+  
+  def valid_kid_range
+    (1..1)
+  end
+end
+
+
 Functions = [Plus, Subtract, Multiply, Modulus, Divide]

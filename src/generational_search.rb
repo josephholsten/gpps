@@ -20,7 +20,7 @@ class GenerationalSearch
   # creating a new generation then the generation size could increase by one
   def search(population, fitness_against, test_data, generation_num=nil)
     generation_num = @num_generations if generation_num.nil?
-
+    
     # If this is the last generation OR if a perfect match has been found then return the best match foundsrc="/images/about_files
     population.fitness_function = fitness_against
     population.test_data = test_data
@@ -63,7 +63,7 @@ class GenerationalSearch
       individuals.push population.random
     }
     
-    individuals.min {|i,j| i.fitness(population.fitness_function) <=> j.fitness(population.fitness_function)}
+    individuals.min {|i,j| i.fitness(population.fitness_function, population.test_data) <=> j.fitness(population.fitness_function, population.test_data)}
   end
   
   def get_random_crossover(population)
