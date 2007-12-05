@@ -53,16 +53,17 @@ end
 
 def render_generational_search(prog)
   require 'erb'
-  template = %{\
+  template = "
 <h2>Deliverable 3: Generational Search</h2>
 <dl>
-<dt>Fitness</dt><dd><%= prog[:fitness] %></dd>
-<dt>Best</dt><dd><%= prog[:best] %></dd>
+<dt>Fitness</dt><dd>#{prog[:fitness]}</dd>
+<dt>Best</dt><dd>#{prog[:best]}</dd>
 </dl>
-}
+"
   
   File.makedirs('deliverables')
   File.open('deliverables/generational_search.html', 'w') do |f|
-    f << ERB.new(template).result
+    # f << ERB.new(template).result
+    f << template
   end
 end

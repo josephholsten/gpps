@@ -10,8 +10,7 @@ task :deliverable1 => :knowledge_representation
 task :deliverable2 => :search_operators
 task :deliverable3 => :generational_search
 task :deliverable4 => :program_representation
-task :deliverable5 => :even_odd
-# task :deliverable5 => [:even_odd, :letter_recognition, :regression]
+task :deliverable5 => [:even_odd, :a_b_recognition, :regression]
 
 task :deliverables => [
   :deliverable1,
