@@ -26,13 +26,6 @@ module Function
     kids_string = @kids.inject("(#{self.class}") {|str,k|
       str + " #{k}"
     } + ")"
-    #~ f = self.class
-    #~ f = "+" if self.is_a?(Plus)
-    #~ f = "-" if self.is_a?(Subtract)
-    #~ f = "*" if self.is_a?(Multiply)
-    #~ f = "/" if self.is_a?(Divide)
-    #~ f = "%" if self.is_a?(Modulus)
-    #~ "(#{@kids[0]} #{f} #{@kids[1]})"
   end
   
   def clone

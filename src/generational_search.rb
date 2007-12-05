@@ -1,15 +1,16 @@
 require 'src/population'
 
 class GenerationalSearch
+  attr_accessor :debug_mode
   def debug(s)
+    print s if @debug_mode
   end
   
   def initialize(params = {})
-    @probabilities = {}
-    
     @num_generations = params[:generations]     || 50
     @tournament_size = params[:tournament_size] || 3
     
+    @probabilities = {}
     @probabilities[:mutation]     = params[:mutation]     || 0.4
     @probabilities[:reproduction] = params[:reproduction] || 0.2
     @probabilities[:crossover]    = params[:crossover]    || 0.4
@@ -21,7 +22,7 @@ class GenerationalSearch
   def search(population, fitness_against, test_data, generation_num=nil)
     generation_num = @num_generations if generation_num.nil?
     
-    # If this is the last generation OR if a perfect match has been found then return the best match foundsrc="/images/about_files
+    # If this is the last generation OR if a perfect match has been found then return the best match found
     population.fitness_function = fitness_against
     population.test_data = test_data
     debug("MIN(#{population.fitness_array.min}) AVG(#{population.fitness_array.average}) MAX(#{population.fitness_array.max})\n")

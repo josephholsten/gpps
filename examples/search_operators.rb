@@ -12,6 +12,15 @@ describe "Search Operations" do
     first_child.should_not == first
     second_child.should_not == second
   end
+it "should crossover functions" do
+  first = Plus.new [Zero.new, Zero.new]
+  second = Modulus.new [PositiveOne.new, NegativeOne.new]
+  
+  first_child, second_child = first.crossover(second)
+  
+  first_child.should_not == first
+  second_child.should_not == second
+end
 
   it "should implement crossover with second terminal" do
     first = Plus.new [Zero.new, Zero.new]

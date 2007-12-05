@@ -45,7 +45,7 @@ def runTest(input = {})
 
   print "SETUP[#{setup}]: (#{input})\n"
   print "BEST: #{best}\n\n"
-  return [best.fitness(perfect, test_data), best]
+  # return [best.fitness(perfect, test_data), best]
 end
 
 tests = []

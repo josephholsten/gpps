@@ -71,27 +71,6 @@ end
 class PositiveFive < Number(5)
 end
 
-class VariableZero < TreeProgram
-  include Terminal
-  
-  # Returns the first parameter.
-  def call(*variables)
-    variables[0]
-  end
-  
-  # Return 1 because this class only operates on first parameter, any
-  # others are ignored.
-  def arity
-    1
-  end
-  
-  # Returns _x_ because that seems like a reasonable representation of a
-  # default variable.
-  def to_s
-    "x"
-  end
-end
-
 Terminals = [NegativeFive,
              NegativeFour,
              NegativeThree,
@@ -103,4 +82,3 @@ Terminals = [NegativeFive,
              PositiveThree,
              PositiveFour,
              PositiveFive]
-Variables = [VariableZero]

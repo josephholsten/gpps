@@ -9,5 +9,21 @@ task :default => [:rdoc, :examples, :stats]
 task :deliverable1 => :knowledge_representation
 task :deliverable2 => :search_operators
 task :deliverable3 => :generational_search
+task :deliverable4 => :program_representation
+task :deliverable5 => :even_odd
+# task :deliverable5 => [:even_odd, :letter_recognition, :regression]
 
-task :deliverables => [:knowledge_representation, :search_operators, :generational_search]
+task :deliverables => [
+  :deliverable1,
+  :deliverable2,
+  :deliverable3,
+  :deliverable4,
+  :deliverable5
+]
+
+desc 'Remove all generated files'
+task :clean do
+  `rm -rf doc`
+  `rm -rf coverage`
+  `rm -rf deliverables`
+end

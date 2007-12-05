@@ -60,17 +60,15 @@ describe "Constant" do
   end
 end
 
-describe "Variable" do
-  before :each do
-    @var = VariableZero.new
+describe "PositiveOne" do
+  it "should not be effected by parameters on call" do
+    PositiveOne.new.call(1).should == PositiveOne.new.call(2)
   end
-  
-  it "should return variable on call" do
-    @var.call(10, 20, 30).should == 10
+  it "should have arity 0" do
+    PositiveOne.new.arity.should == 0
   end
-
-  it "should have a string representations for a variable" do
-    @var.to_s.should == "x"
+  it "should need no children" do
+    PositiveOne.new.valid_kid_range.should == (0..0)
   end
 end
 

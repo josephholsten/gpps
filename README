@@ -1,0 +1,311 @@
+To generate deliverable reports, run the deliverables task:
+> rake deliverables
+
+
+FITNESS(0.122222222222222)
+BEST: (Not (Multiply (Not (Multiply x19 x16)) (Divide x18 x18)))
+
+FITNESS(0.118055555555556)
+BEST: (Xor (Xor x20 x18) x3)
+
+FITNESS(0.125)
+BEST: (Multiply (Divide (And x13 x22) (Multiply (Multiply (Divide (And x13 x2) x3) (Xor x3 x15)) x19)) x8)
+
+FITNESS(0.123611111111111)
+BEST: (Xor x14 (Subtract (Divide x23 x23) (Subtract (Not 0) x17)))
+
+FITNESS(0.140277777777778)
+BEST: (Xor x15 x14)
+
+FITNESS(0.152777777777778)
+BEST: (Xor x18 0)
+
+FITNESS(0.124305555555556)
+BEST: (Xor (Multiply x2 x3) x8)
+
+FITNESS(0.11875)
+BEST: (Xor x16 x24)
+
+FITNESS(0.133333333333333)
+BEST: (Xor x12 x6)
+
+FITNESS(0.0993055555555555)
+BEST: (Not (Or (Multiply (Xor x3 (And (Divide x14 x8) x16)) x13) (Or x8 x21)))
+
+FITNESS(0.100694444444444)
+BEST: (Not (Not (Multiply (Xor x1 x13) (Multiply (Not x24) x15))))
+
+FITNESS(0.122222222222222)
+BEST: (Not x3)
+
+FITNESS(0.14375)
+BEST: (Xor (Xor x8 x16) (Subtract x9 x20))
+
+FITNESS(0.104861111111111)
+BEST: (Xor x19 x7)
+
+FITNESS(0.0930555555555556)
+BEST: (Not (Not 1))
+
+FITNESS(0.132638888888889)
+BEST: (Xor x12 (Divide (Subtract x1 1) x14))
+
+FITNESS(0.122916666666667)
+BEST: (Xor x15 (Not (Plus x9 (Divide (Xor (Multiply x13 (Divide x18 x18)) 1) (And x11 x9)))))
+
+FITNESS(0.163194444444444)
+BEST: (Multiply (Not (And (Subtract (And x13 x5) x8) x10)) x8)
+
+FITNESS(0.133333333333333)
+BEST: (Not (Xor x13 (And 0 x9)))
+
+FITNESS(0.106944444444444)
+BEST: (Multiply (Xor (And x15 x6) (Multiply x7 x19)) x16)
+
+FITNESS(0.129861111111111)
+BEST: (Xor (Not x15) (Not (Plus x4 x0)))
+
+FITNESS(0.145833333333333)
+BEST: (Xor x11 (Xor (Subtract (Xor x24 x18) (Multiply (Divide (Xor x0 (Divide x10 1)) x8) x8)) x18))
+
+FITNESS(0.118055555555556)
+BEST: (Not (Plus (Multiply x1 (Not x13)) (Plus x8 (Multiply x12 x23))))
+
+FITNESS(0.102777777777778)
+BEST: (Multiply (Xor x15 x15) x2)
+
+FITNESS(0.155555555555556)
+BEST: (Xor x22 x23)
+
+FITNESS(0.13125)
+BEST: (Xor x16 x23)
+
+FITNESS(0.138888888888889)
+BEST: (Xor (Divide 0 (And x20 x6)) 0)
+
+FITNESS(0.125)
+BEST: (Xor (Subtract (Xor x1 x2) x24) (Multiply (Plus x10 x17) (Multiply (Divide x4 x14) (Subtract x9 (Subtract x22 x3)))))
+
+FITNESS(0.100694444444444)
+BEST: (Xor x0 x11)
+
+FITNESS(0.0965277777777778)
+BEST: (Xor (Subtract (Not x0) x7) (Divide x2 x14))
+
+FITNESS(0.113888888888889)
+BEST: (Xor x2 x24)
+
+FITNESS(0.125)
+BEST: (Divide (Divide x24 x17) (Divide x21 (Xor (Xor (And x12 (Or x5 x10)) x12) x21)))
+
+FITNESS(0.120138888888889)
+BEST: (Multiply (Multiply (Multiply x6 (Xor x20 (Plus x0 (Or x4 (Subtract 1 x16))))) x14) x20)
+
+FITNESS(0.120833333333333)
+BEST: 0
+
+FITNESS(0.128472222222222)
+BEST: (Xor x24 (Subtract x5 x7))
+
+FITNESS(0.140972222222222)
+BEST: (Xor (Xor (Xor x12 x14) x18) (Xor x9 x18))
+
+FITNESS(0.136805555555556)
+BEST: (Xor x24 (Multiply x15 x24))
+
+FITNESS(0.140277777777778)
+BEST: (Xor (Xor (Xor x10 x12) x4) x7)
+
+FITNESS(0.13125)
+BEST: (Divide 0 (Divide (Xor x21 x20) x0))
+
+FITNESS(0.1125)
+BEST: (Xor x13 x9)
+
+FITNESS(0.139583333333333)
+BEST: (Xor (Divide x14 x15) (Xor x22 (And x2 (Or x14 0))))
+
+FITNESS(0.105555555555556)
+BEST: (Xor 0 x11)
+
+FITNESS(0.122222222222222)
+BEST: (Divide (Xor (Xor x17 x4) (Subtract (Xor x2 x15) x3)) x16)
+
+FITNESS(0.102777777777778)
+BEST: (Divide (Not (Not x4)) (Not (And x4 x7)))
+
+FITNESS(0.160416666666667)
+BEST: (Xor (Multiply (Not x4) x5) x21)
+
+FITNESS(0.119444444444444)
+BEST: (Not (Plus (Multiply 0 x0) (Or x1 0)))
+
+FITNESS(0.144444444444444)
+BEST: (Not (Subtract x15 x2))
+
+FITNESS(0.135416666666667)
+BEST: (Xor (Multiply (Xor (Divide (Not x6) x18) x2) (Not x23)) 1)
+
+FITNESS(0.150694444444444)
+BEST: (Multiply (Xor x1 x23) x12)
+
+FITNESS(0.159027777777778)
+BEST: (Xor x24 x8)
+
+FITNESS(0.116666666666667)
+BEST: (Xor (Subtract (Multiply x23 (Multiply x23 0)) (Not (Xor x6 x20))) x0)
+
+FITNESS(0.115972222222222)
+BEST: (Xor (Multiply (And x24 (Or (Subtract x23 x20) x17)) (Xor (Or x10 x10) x12)) x11)
+
+FITNESS(0.144444444444444)
+BEST: (Xor (Multiply (Subtract x8 1) x6) x12)
+
+FITNESS(0.14375)
+BEST: (Xor (Xor x22 x3) (Xor (Xor x22 (And (Divide 0 0) x24)) (Xor (Not x3) (Subtract (Plus x1 (Divide x8 x22)) x13))))
+
+FITNESS(0.11875)
+BEST: (Xor x22 x13)
+
+FITNESS(0.107638888888889)
+BEST: (Xor x3 (Plus 1 x7))
+
+FITNESS(0.131944444444444)
+BEST: (Xor (Not (And (Multiply x16 x7) (Xor x16 x9))) x23)
+
+FITNESS(0.101388888888889)
+BEST: (Xor (Xor x22 (Not x23)) x23)
+
+FITNESS(0.130555555555556)
+BEST: (Not (Plus (Multiply x9 x15) (Not x12)))
+
+FITNESS(0.11875)
+BEST: (Not x15)
+
+FITNESS(0.106944444444444)
+BEST: (Xor (Xor x3 (Multiply x5 (Divide x20 x18))) x4)
+
+FITNESS(0.128472222222222)
+BEST: (Xor (Xor x15 x16) (Multiply (And x19 x0) 1))
+
+FITNESS(0.116666666666667)
+BEST: (Xor x19 (Multiply 1 (Subtract (Not x14) (Divide x11 1))))
+
+FITNESS(0.163888888888889)
+BEST: (Not (Or (Not (Divide x23 x23)) x4))
+
+FITNESS(0.130555555555556)
+BEST: (Not (Xor x8 (Xor x17 (Multiply (Xor x24 x16) x14))))
+
+FITNESS(0.140972222222222)
+BEST: (Xor (Xor x12 (Or x9 (Xor x10 x12))) x6)
+
+FITNESS(0.130555555555556)
+BEST: (Xor (And (Xor (Xor x18 x15) (Xor x21 x14)) x22) x18)
+
+FITNESS(0.0979166666666667)
+BEST: (Xor x8 x15)
+
+FITNESS(0.133333333333333)
+BEST: (Xor x1 (Subtract x21 (Subtract x16 (Not x19))))
+
+FITNESS(0.102777777777778)
+BEST: (Xor (And x23 x21) (Subtract (Xor x15 x12) (Not (Xor x7 (Divide x24 (Xor x5 x17))))))
+
+FITNESS(0.110416666666667)
+BEST: (Xor x9 (Xor (And x19 x22) (Xor (And 0 1) x9)))
+
+FITNESS(0.134722222222222)
+BEST: (Xor (Not x24) x8)
+
+FITNESS(0.111805555555556)
+BEST: (Xor (Xor (Divide x6 x23) (Divide (Or x21 x21) x0)) x7)
+
+FITNESS(0.129861111111111)
+BEST: (Xor x3 (Or x4 (Xor x8 (Not x9))))
+
+FITNESS(0.147916666666667)
+BEST: (Xor (Divide (Multiply x8 (Not (Or (Subtract x8 x15) x19))) x1) x10)
+
+FITNESS(0.11875)
+BEST: (Xor (And x18 x19) x19)
+
+FITNESS(0.13125)
+BEST: (Divide (Xor x16 0) x0)
+
+FITNESS(0.100694444444444)
+BEST: (Xor (Divide x22 x16) x12)
+
+FITNESS(0.121527777777778)
+BEST: (Divide 0 (Multiply (Xor x19 x11) x21))
+
+FITNESS(0.0930555555555556)
+BEST: (Xor x9 x4)
+
+FITNESS(0.140277777777778)
+BEST: (Xor (Xor x16 x4) x7)
+
+FITNESS(0.143055555555556)
+BEST: (Xor x1 (Multiply (Not x21) x19))
+
+FITNESS(0.11875)
+BEST: (Xor (And x2 x10) (Xor x15 x12))
+
+FITNESS(0.132638888888889)
+BEST: (Xor (Divide (Xor x11 x10) (Xor x9 x23)) (Plus 1 (Not x24)))
+
+FITNESS(0.128472222222222)
+BEST: (Xor (Or x4 (Plus (Xor x7 x7) x16)) x19)
+
+FITNESS(0.103472222222222)
+BEST: (Not (Plus (And (Subtract 1 (Multiply 1 (Xor x7 (And x0 x21)))) x10) x15))
+
+FITNESS(0.126388888888889)
+BEST: (Xor x21 x16)
+
+FITNESS(0.134722222222222)
+BEST: (Not (Not x11))
+
+FITNESS(0.130555555555556)
+BEST: (Xor x3 x7)
+
+FITNESS(0.0944444444444444)
+BEST: (Xor 0 (Or x2 (Subtract x22 x9)))
+
+FITNESS(0.115277777777778)
+BEST: (Xor x4 (Or x9 x18))
+
+FITNESS(0.125694444444444)
+BEST: (Xor (And x11 (Xor x8 (And (Or x16 x12) x19))) x17)
+
+FITNESS(0.111805555555556)
+BEST: (Not x11)
+
+FITNESS(0.1375)
+BEST: (Xor x2 x13)
+
+FITNESS(0.1)
+BEST: (Not (Not (Multiply x19 x13)))
+
+FITNESS(0.156944444444444)
+BEST: (Xor (Not 0) (Not x0))
+
+FITNESS(0.134027777777778)
+BEST: (Xor (Xor (Divide x15 x0) (Subtract x3 (Plus x16 (Xor (Multiply x18 x6) x11)))) 1)
+
+FITNESS(0.120833333333333)
+BEST: (Xor x2 x22)
+
+FITNESS(0.110416666666667)
+BEST: (Multiply (Xor (And x9 1) x10) x11)
+
+FITNESS(0.105555555555556)
+BEST: (Xor (Plus x17 x22) 0)
+
+Best Five:0.0979166666666667: (Xor x8 x15)
+0.0965277777777778: (Xor (Subtract (Not x0) x7) (Divide x2 x14))
+0.0944444444444444: (Xor 0 (Or x2 (Subtract x22 x9)))
+0.0930555555555556: (Xor x9 x4)
+0.0930555555555556: (Not (Not 1))
+Average: 0.124881944444445
+Time: 3559.37923407555sec

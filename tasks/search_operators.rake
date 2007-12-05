@@ -1,3 +1,4 @@
+desc "Demonstrate search operators mutation, crossover, and reproduction"
 task :search_operators do
   require 'src/population'
   
@@ -52,16 +53,16 @@ end
 
 def render_search_operators
   require 'erb'
-  template = %{
-<h2>Deliverable 2: Search Operators</h2>
+  template = '<h2>Deliverable 2: Search Operators</h2>'
  
-<% @passes.each do |pass| %>
-  <%= render_pass(pass) %>
-<% end %>
-}
+  @passes.each do |pass| 
+    template << render_pass(pass) 
+  end
+
   
+  File.makedirs('deliverables')
   File.open('deliverables/search_operators.html', 'w') do |f|
-    f << ERB.new(template, 1).result
+    f << template
   end
 end
 

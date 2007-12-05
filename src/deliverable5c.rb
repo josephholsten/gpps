@@ -131,6 +131,7 @@ def run_test(historical, num_generations)
 
   print "FITNESS(#{best.fitness(perfect, test_data)})\n"
   print "BEST: #{best}\n\n"
+  return {:function => best, :fitness => best.fitness(perfect, test_data)}
 end
 
 # Approximatly exponential

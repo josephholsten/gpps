@@ -1,3 +1,4 @@
+desc "Demonstrate the genetic programming knowledge representation"
 task :knowledge_representation do
   require 'src/population'
   p = Population.new
@@ -10,7 +11,7 @@ end
 def render_knowledge_representation
   require 'erb'
   template = %{\
-<h2>Deliverable 3: Generational Search</h2>
+<h2>Deliverable 1: Knowledge Representation</h2>
  
 <h3>Fitnesses</h3>
 <ul>
@@ -29,7 +30,7 @@ def render_knowledge_representation
   <dd><%= @fitnesses.average %></dd>
 </dl>
 }
-  
+  File.makedirs('deliverables')
   File.open('deliverables/knowledge_representation.html', 'w') do |f|
     f << ERB.new(template).result
   end

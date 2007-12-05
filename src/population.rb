@@ -1,13 +1,10 @@
 require 'src/program'
 require 'src/custom_methods'
+require 'src/variable'
 
 class Population < Array
-  attr_reader :functions
-  attr_reader :terminals
-  attr_reader :size
-  attr_reader :maxdepth
-  attr_accessor :fitness_function
-  attr_accessor :test_data
+  attr_reader :functions, :terminals, :size, :maxdepth
+  attr_accessor :fitness_function, :test_data
 
   def initialize(params = {})
     #if we have really been passed another population just pull it's variables and dont generate a random population
@@ -22,7 +19,8 @@ class Population < Array
     @terminals        = params[:terminals]    || Terminals + Variables
     @size             = params[:size]         || 30
     @maxdepth         = params[:maxdepth]     || 4
-    @test_data        = params[:test_data]    || (0..5)
+    # @test_data        = params[:test_data]    || (0..5)
+    @test_data        = params[:test_data]    || [[1],[2],[3],[4],[5]]
     @fitness_function = params[:fitness_function]
     
     @size.times {|i|

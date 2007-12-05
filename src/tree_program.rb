@@ -136,9 +136,9 @@ class TreeProgram
   end
   
   def fitness(expected_program, test_data = nil)
-    data = test_data || (0..5)
+    data = test_data || [[1],[2],[3],[4],[5]]
     data.collect {|datum|
-      (expected_program.call(datum) - self.call(datum)) ** 2.0
+      (expected_program.call(*datum) - self.call(*datum)) ** 2.0
     }.average
   end
   
