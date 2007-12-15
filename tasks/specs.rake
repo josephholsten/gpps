@@ -1,6 +1,6 @@
 require 'spec/rake/spectask'
 
-desc "Run examples using RCov"
+desc "Run examples and report code coverage"
 Spec::Rake::SpecTask.new('examples') do |t|
   t.spec_files = FileList['examples/**/*.rb']
   # t.rcov       = true

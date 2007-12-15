@@ -1,4 +1,4 @@
-desc "Demonstrate the genetic programming knowledge representation"
+desc "Demonstrate the knowledge representation"
 task :knowledge_representation do
   require 'src/population'
   p = Population.new

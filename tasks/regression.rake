@@ -1,13 +1,16 @@
+desc 'Demonstrate the function regression problem'
 task :regression do
-  RegressionDeliverable.dispatch
+  RegressionDeliverable.new.dispatch
 end
 
 class RegressionDeliverable
   require 'src/generational_search'
   require 'src/variable'
   require 'src/regression_function'
-  def self.dispatch
-    parameters = RegressionDeliverable.environment
+  require 'src/deliverable'
+  include Deliverable
+  def dispatch
+    parameters = environment
 
     results = []
     historicals = [
@@ -20,59 +23,35 @@ class RegressionDeliverable
     ]
     
     historicals.each{|historical|
-      results << RegressionDeliverable.run_test(historical)
+      results << run_test(historical)
     }
-    RegressionDeliverable.render(results)
+    render(:results => results)
   end
   
-  def self.environment
+  def environment
     {
-      :generations     => 200,
-      :tournament_size => 3,
-      :mutation        => 0.311,
-      :reproduction    => 0.532,
-      :crossover       => 0.155,
+      # Population
       # Using some non-standard functions in the mix
       :functions       => [Logarithm, Parabola, StraightLine, Multiply, Divide, Plus, Subtract, Squared, Cubed],
       :terminals       => [PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, VariableZero, VariableZero],
       :size            => 10,
       :maxdepth        => 4,
+      # Generational Search
+      :generations     => 200,
+      :tournament_size => 3,
+      :mutation        => 0.311,
+      :reproduction    => 0.532,
+      :crossover       => 0.155,
+      # Rendering
+      :title           => 'Deliverable 5c: Regression',
+      :filename        => 'deliverables/regression.html'
     }
   end
   
-  def self.run_test(historical, parameters = environment)
-
+  def run_test(historical, parameters = environment)
     parameters[:test_data] = historical.keys.sort
-
-    # Generate the *perfect* function based on known values
-
-    # Beautiful, but kinda evil
-    # perfect_eval =   "lambda {|j| \n"
-    # historical.each { |size, time| perfect_eval += "return #{time} if j==#{size}\n" }
-    # perfect_eval += "}\n"
-    # perfect = eval(perfect_eval)
-
     parameters[:perfect] = lambda {|j| historical[j] }
 
-    RegressionDeliverable.test(parameters)
-  end
-  
-  def self.test(parameters)
-    require 'src/generational_search'
-    p = Population.new(parameters)
-    g = GenerationalSearch.new(parameters)
-
-    best = g.search(p, parameters[:perfect], parameters[:test_data])
-
-    {:program => best, :fitness => best.fitness(parameters[:perfect], parameters[:test_data])}
-  end
-  
-  def self.render(results, time = nil)
-    # render_regression(results)
-    results.each{|res|
-      print "FITNESS(#{res[:fitness]})\n"
-      print "BEST: #{res[:program]}\n\n"
-    }
-    print "Time: #{time}sec\n" if time
+    test(parameters)
   end
 end

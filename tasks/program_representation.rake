@@ -1,3 +1,4 @@
+desc 'Demonstrate effects of varying population and search parameters'
 task :program_representation do
   require 'src/generational_search'
   

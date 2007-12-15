@@ -22,22 +22,6 @@ task :generational_search do
     :test_data       => (-20..20)
   }
   
-  
-  # p = Population.new :size => 100, :maxdepth => 4
-  # I know we shouldn't need to but it helps quiet a bit if we trim down the number of terminals
-  # p = Population.new :functions => [Multiply, Divide, Plus],
-  #                    :terminals => [PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, VariableZero],
-  #                    :size => 100,
-  #                    :maxdepth => 4
-  # 
-  # g = GenerationalSearch.new :generations => 50,
-  #                                :tournament_size => 3,
-  #                                :mutation => 0.4,
-  #                                :reproduction => 0.2,
-  #                                :crossover => 0.4
-
-  # prog = g.search(p, @perfect, @test_data)
-  
   prog = test_generational_search(parameters)
   
   render_generational_search prog
